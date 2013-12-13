@@ -20,8 +20,8 @@ $bsae-color-light:      desaturate(lighten($base-color, 40%), 10%);
 $base-color-lightened:  desaturate(lighten($base-color, 25%),  3%);
 
 /* Triad Colors */
-$triad-color-1:         adjust-hue($base-color, -$triad-hue-adjust);
-$triad-color-2:         adjust-hue($base-color,  $triad-hue-adjust);
+$triad-color-1:         saturate(adjust-hue($base-color, -$triad-hue-adjust), 30%);
+$triad-color-2:         saturate(adjust-hue($base-color,  $triad-hue-adjust), 10%);
 
 /* Complement Color */
 $complement-color:      adjust-hue($base-color, 180deg);
