@@ -213,19 +213,11 @@ pre {
  * -------------------- */
 
 .footnotes {
-  color: lighten($default-text-color, $footnotes-lighten);
   margin-top: 3em;
-
-  a {
-    color: lighten($link-color, $footnotes-lighten);
-  }
+  opacity: $footnotes-opacity;
 
   &:hover {
-    color: inherit;
-
-    a {
-      color: $link-color;
-    }
+    opacity: 1;
   }
 }
 
