@@ -96,6 +96,14 @@ abbr[data-original-title] {
  * Posts and Post Lists
  * -------------------- */
 
+.post-metadata {
+  margin-bottom: 1em;
+}
+
+.post-tags {
+  color: $dark-gray;
+}
+
 ul.post-list {
   li {
     font-size: larger;
