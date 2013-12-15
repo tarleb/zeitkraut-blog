@@ -248,22 +248,39 @@ footer {
   color: $footer-text-color;
   margin-top: $footer-height;
   min-height: $footer-height;
-  padding-top: ($footer-height / $golden-ratio) / 2;
+  padding: 1em 0 1em;
+  text-align: center;
 
   a {
     background-color: inherit;
     color: $footer-link-color;
+
+    &[href^="https://github"]::after,
+    &[href^="http://zeitlens.com"]::after,
+    &[href^="https://zeitlens.com"]::after {
+      content: "";
+    }
+
+    &:hover {
+      background-color: $dark-gray;
+      color: $footer-link-hover-color;
+    }
   }
 
-  a:hover {
-    background-color: $dark-gray;
-    color: $footer-link-hover-color;
+  .copyright-notice {
+    white-space: nowrap;
+  }
+
+  #feed-and-code {
+    margin-top: 0.7em;
   }
 }
 
 
-/* Misc
- * **** */
+/* -------------------- *
+ * Misc
+ * -------------------- */
+
 /* Avoiding Spam */
 .obfuscated-mail-address {
   &::before {
@@ -287,7 +304,7 @@ footer {
  * -------------------- */
 
 /* Logo style definitions in imported files are minimal as this makes it
- * easier to re-use files for SVG image files. */
+ * easier to re-use styles for SVG image files. */
 
 @import "css/zeitlens-logo-default.scss";
 
