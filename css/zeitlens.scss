@@ -217,7 +217,7 @@ pre {
 }
 
 /* -------------------- *
- * Footer and Footnotes
+ * Page Contents
  * -------------------- */
 
 .footnotes {
@@ -228,6 +228,18 @@ pre {
     opacity: 1;
   }
 }
+
+.contact-info {
+  background-color: $light-gray;
+  border-radius: 4px;
+  display: inline-block;
+  margin: 0.5em 0 1em 0;
+  padding: 1em 1.5em 1em 1.5em;
+}
+
+/* -------------------- *
+ * Footer
+ * -------------------- */
 
 footer {
   background-color: $footer-bg-color;
