@@ -271,6 +271,9 @@ footer {
     }
   }
 
+  abbr[title] {
+    border-color: mix($footer-bg-color, $footer-text-color, 60%);
+  }
   .copyright-notice {
     white-space: nowrap;
   }
