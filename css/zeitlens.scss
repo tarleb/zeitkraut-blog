@@ -83,7 +83,7 @@ a {
   }
 }
 
-date {
+time {
   color: $base-color-darkened;
 }
 
@@ -98,6 +98,10 @@ abbr[data-original-title] {
 
 .post-metadata {
   margin-bottom: 1em;
+
+  time {
+    font-weight: bold;
+  }
 }
 
 .post-tags {

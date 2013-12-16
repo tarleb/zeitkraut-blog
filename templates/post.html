@@ -1,16 +1,14 @@
-<article itemscope="" itemtype="http://schema.org/BlogPosting">
-  <h1 itemprop="headline">$title$</h1>
+<article vocab="http://schema.org/" typeof="BlogPosting">
+  <h1 property="headline">$title$</h1>
 
-  <p>
-    <div class="post-metadata">
-      <strong>
-        <date datetime="$datetime$" itemprop="datePublished">$date$</date>
-      </strong>
-      <div class="post-tags">tagged with: $tags$</div>
+  <div class="post-metadata">
+    <div class="post-date">
+      <time datetime="$datetime$" property="datePublished">$date$</time>
     </div>
-  </p>
+    <div class="post-tags">tagged with: $tags$</div>
+  </div>
 
-  <div itemprop="articleBody">
+  <div property="articleBody">
     $body$
   </div>
 </article>

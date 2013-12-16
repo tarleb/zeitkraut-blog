@@ -1,22 +1,24 @@
 ---
 title: Contact
 ---
-<div itemscope="" itemtype="http://schema.org/Person" id="johndoe">
-  <strong itemprop="name">John Doe</strong><br/>
-  <div itemprop="address" itemscope="" itemtype="http://schema.org/PostalAddress">
+<div vocab="http://schema.org/" typeof="Person" id="johndoe">
+  <strong property="name">John Doe</strong><br/>
+  <div typeof="PostalAddress" property="address">
     <address>
-      <span itemprop="streetAddress">Street</span><br/>
-      <span itemprop="postalCode">00000</span> <span itemprop="addressLocality">Metropolis</span><br/>
-      <span itemprop="addressCountry">USA</span>
+      <span property="streetAddress">Street</span><br/>
+      <span property="postalCode">00000</span> <span property="addressLocality">Metropolis</span><br/>
+      <span property="addressCountry">USA</span>
     </address>
 
-    <p>
-      <div>Tel: <span itemprop="telephone">+1 555 000 0000</span></div>
+    <div>
+      <div>Tel: <a href="tel:+1-555-000-0000"
+                   rel="telephone"
+                   property="telephone">+1 - 555 - 000 0000</a></div>
       <div>Mail:
         <span data-domain="example.com"
               class="obfuscated-mail-address"
               data-user="john">&#0064;<span>obfuscated mail address</span></span>
       </div>
-    </p>
+    </div>
   </div>
 </div>
