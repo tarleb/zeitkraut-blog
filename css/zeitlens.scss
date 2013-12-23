@@ -295,15 +295,11 @@ footer {
 /* Avoiding Spam */
 .obfuscated-mail-address {
   &::before {
-    content: attr(data-user);
+    content: attr(data-user) "@" attr(data-domain);
   }
 
   > * {
     display: none;
-  }
-
-  &::after {
-    content: attr(data-domain);
   }
 }
 
