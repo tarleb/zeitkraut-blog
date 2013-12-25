@@ -166,7 +166,7 @@ pre {
   $paddingLeftRight: 15px;
   a {
     color: $navbar-color;
-    background-color: inherit;
+    background-color: transparent;
     &:hover {
       color: $navbar-link-hover-color;
       background-color: $navbar-link-hover-bg-color;
@@ -186,6 +186,12 @@ pre {
       color: $navbar-brand-color;
     }
   }
+}
+
+.navbar-toggle {
+  color: $navbar-color;
+  background-color: transparent;
+  text-align: top;
 }
 
 /* -------------------- *
