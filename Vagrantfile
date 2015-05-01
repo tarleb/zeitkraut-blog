@@ -20,6 +20,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   ## SYNCED FOLDERS
   config.vm.synced_folder ".", "/vagrant", disabled: true
+  config.vm.synced_folder "salt/roots/", "/srv/salt/", type: "rsync"
   config.vm.synced_folder "content", "/home/vagrant/content", type: "rsync",
                           rsync__exclude: "content/.git/"
   config.vm.synced_folder "hakyll", "/home/vagrant/hakyll", type: "rsync",
@@ -29,7 +30,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   ## ############
   # Ensure the system is current
   config.vm.provision "shell", inline: 'apt-get update && apt-get upgrade -y'
-  config.vm.provision "shell",
-    inline: ("apt-get install -qy --no-install-recommends libghc-hakyll-dev" +
-             " ghc cabal-install ruby-sass imagemagick librsvg2-bin")
+
+  config.vm.provision :salt do |salt|
+    salt.minion_config = "salt/minion"
+    salt.run_highstate = true
+  end
 end
