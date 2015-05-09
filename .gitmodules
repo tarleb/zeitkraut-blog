@@ -1,3 +1,6 @@
 [submodule "content"]
 	path = content
 	url = zk:repos/free/zeitkraut-content.git
+[submodule "hakyll"]
+	path = hakyll
+	url = zk:repos/free/zeitkraut-hakyll.git
