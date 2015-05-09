@@ -25,6 +25,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
                           rsync__exclude: "content/.git/"
   config.vm.synced_folder "hakyll", "/home/vagrant/hakyll", type: "rsync",
                           rsync__exclude: "hakyll/.git/"
+  config.vm.synced_folder "_build", "/home/vagrant/_build"
 
   ## PROVISIONING
   ## ############
@@ -36,4 +37,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     salt.run_highstate = true
     salt.bootstrap_script = "salt/bootstrap.sh"
   end
+
+  config.vm.provision :shell, path: "build.sh", privileged: false
 end
