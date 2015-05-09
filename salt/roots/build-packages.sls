@@ -7,3 +7,6 @@ build-packages:
       - ruby-sass
       - imagemagick
       - librsvg2-bin
+      - git
+      - npm
+      - nodejs-legacy
