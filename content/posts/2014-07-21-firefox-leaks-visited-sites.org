@@ -1,0 +1,62 @@
+---
+title: How Firefox leaks visited sites
+author: Albert Krewinkel
+date: 2014-07-21
+tags: browsers, privacy, security
+---
+
+#+LINK: wp https://en.wikipedia.org/wiki/
+
+I consider Firefox to be a rather secure and reliable browser with reasonable
+security and privacy setting.  I was rather horrified when I found out that it
+sends the name of visited domains to other servers around the world.  Here is
+why it does it, and what you can do about it.
+
+
+** The Online Certificate Status Protocol (%OCSP)
+
+The information Firefox sends relates to [[wp:OCSP][OCSP]], a protocol used to ensure the
+validity of an SSL certificate.  Certificates which have been compromised or
+need to be revoked for other reasons, should no longer be accepted by the
+browser.  When the [[https://heartbleed.com][heartbleed bug]] became public, it became even more obvious
+why a mechanism is required to keep the web (somewhat) secure.  %OCSP is
+one such mechanism, but in it's current state, it's terrible.
+
+The way %OCSP works in Firefox is that upon visiting an encrypted website,
+the browser sends a request to the [[wp:Certificate Authority][%CA]] which signed the website's certificate.
+The %CA will then answer with a report on the certificate's revokation status,
+thereby noting the user in cases where the certificate, and hence the
+connection with the website, should not be trusted anymore.
+
+Unfortunately, the whole method doesn't actually add security but instead
+creates new privacy problems.
+
+** Privacy implications
+
+When the browser checks a certificate's validity via %OCSP, it notifies a
+third party (the %CA) about which website the user is accessing and when he is
+doing it.  This can mean that when you access your mail provider homepage or
+your favorite local news site over https, a request will be send to a server,
+possibly on the other side of the world, to tell that server about your
+action.  Such information should be none of the %CA's business, but Firefox
+happily sends it nonetheless.
+
+What makes the story even worse is the fact that this method doesn't even add
+any security.  Adam Langley explains it better than I could, so if you are
+interested in the topic, you should read his [[https://imperialviolet.org/2014/04/19/revchecking.html][explanation]] on why %OCSP is
+basically [[wp:snake oil][snake oil]] and fails in making the web more secure.
+
+** Plugging the hole
+
+Alternative methods like [[wp:OCSP%20Stapling][OCSP stapling]] and [[wp:CRL][CRL]] exist and don't suffer from
+those problems, so there is no need to keep %OCSP activated in the browser.
+Chrome has it disabled by default; you can disable it in Firefox by following
+these brief instructions:
+
+- Open a new tab in Firefox and visit the URL [[about:config]].
+- Click the /I'll be careful, I promise/ button.
+- Enter =OCSP= into the search/filter field.
+- Double click on =security.OCSP.enabled= and set its value to =0=.
+
+Done.  You just stoped Firefox from needlessly leaking private browsing
+information to other parties.  Happy browsing! 
