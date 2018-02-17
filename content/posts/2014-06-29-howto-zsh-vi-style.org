@@ -1,0 +1,160 @@
+---
+title: How to configure zsh with vi bindings and nice shortcuts
+date: 2014-06-29
+author: Albert Krewinkel
+tags: zsh, vi, prompt, key bindings, customization
+---
+
+#+LINK: wp https://en.wikipedia.org/wiki/
+
+Having a good working environment is vital for feeling comfortable being
+productive.  This extends to computational tools and the [[wp:command shell][command shell]] is an
+integral part of the daily work for many of us.  It's a good idea to configure
+the shell's interface to be efficient and pleasant to use.  Here we see how
+=zsh=, arguably the best shell around, can be configured to suit the needs of
+people used to vi key bindings (which are arguably arguably superior and more
+ergonomical than the default emacs-style bindings)[fn::Emacs is a great
+program which I've been using for years and continue to use daily, but vi
+bindings just make good things better.  Thanks to [[https://gitorious.org/evil/pages/Home][evil,]] that's not a
+problem.].
+
+** Using vi-bindings in the shell
+
+The first step towards nice vi key bindings is almost too easy: The red pill
+takes the form of
+#+BEGIN_SRC sh
+  bindkey -v
+#+END_SRC
+Type it into your prompt (and add it to your =.zshrc= file) and emacs bindings
+are going bye-bye.  =Escape= will bring you to normal-mode, while =i=, =a=,
+=o= etc. will bring you back to insert-mode, just as with your favorite
+editor.  Use =j= and =k= in normal-mode to go through your history and move
+around within the line with =h=, =l=, =w=, =b= and the like.
+
+This is a good start, let's see how we can bring it from "this is nice" to
+"that's just awesome".
+
+First, we may want to keep some of the default key bindings in insert-mode
+since we've grown accustomed to them.  No missing out, let's put them back in:
+
+#+BEGIN_SRC sh
+  # Kill input from the current point to the end of line with Ctrl-k
+  bindkey '^k' kill-line
+  # Search the history incremantally with Ctrl-r
+  bindkey '^r' history-incremental-search-backward
+  # Insert and go through the "last words" of previous commands with Meta-.
+  # (or Escape-. for that matter).
+  bindkey '^[.' insert-last-word
+  # Show the man-page or other helpful infos with Meta-h
+  bindkey '^[h' run-help
+#+END_SRC
+
+You can take a look at the key bindings defined for emacs-mode by typing
+=bindkey -M emacs -L= and reuse the bindings you like.  See the =zshzle=
+manpage for more pre-defined widgets for which you could define bindings.
+
+** Configuring the prompt to show the current editing mode
+
+So the key bindings are quite usable now, but it's a bit unfortunate that it
+is impossible to see if the shell is in insert- or normal-mode.  There should
+be a mode indicator right in the shell prompt!
+
+#+BEGIN_SRC sh
+  # You may already have those in your .zshrc somewhere
+  autoload -U promptinit && promptinit
+  autoload -U colors     && colors
+
+  setopt prompt_subst
+
+  # Set the colors to your liking
+  local vi_normal_marker="[%{$fg[green]%}%BN%b%{$reset_color%}]"
+  local vi_insert_marker="[%{$fg[cyan]%}%BI%b%{$reset_color%}]"
+  local vi_unknown_marker="[%{$fg[red]%}%BU%b%{$reset_color%}]"
+  local vi_mode="$vi_insert_marker"
+  vi_mode_indicator () {
+    case ${KEYMAP} in
+      (vicmd)      echo $vi_normal_marker ;;
+      (main|viins) echo $vi_insert_marker ;;
+      (*)          echo $vi_unknown_marker ;;
+    esac
+  }
+
+  # Reset mode-marker and prompt whenever the keymap changes
+  function zle-line-init zle-keymap-select {
+    vi_mode="$(vi_mode_indicator)"
+    zle reset-prompt
+  }
+  zle -N zle-line-init
+  zle -N zle-keymap-select
+
+  # Multiline-prompts don't quite work with reset-prompt; we work around this by
+  # printing the first line(s) via a precmd which is executed before the prompt
+  # is printed.  The following can be integrated into PROMPT for single-line
+  # prompts.
+  #
+  # Colorize freely
+  local user_host='%B%n%b@%m'
+  local current_dir='%~'
+  precmd () print -rP "${user_host} ${current_dir}"
+
+  local return_code="%(?..%{$fg[red]%}%? %{$reset_color%})"
+  PROMPT='${return_code}${vi_mode} %# '
+#+END_SRC
+
+This gives a prompt in the style of
+
+#+BEGIN_SRC
+  user@host /current/working/path
+  [I] %
+#+END_SRC
+
+where =[I]= is the insert-mode indicator and is changed to =[N]= when
+normal-mode is activated.  Neat, isn't it?
+
+
+** Single- and multi-key shortcuts
+
+This is all nice and dandy, but it's not quite like vim yet.  How about those
+sweet bindings where pressing =jj= in quick succession brings us to
+normal-mode without having to press =Esc=?  Setting it up is easy as pie.
+
+#+BEGIN_SRC sh
+  # Time in which two keys have to be pressed in order to be recognized as a
+  # single command (in centiseconds, set to 0.4 sec by default -- may be
+  # modified as needed).
+  export KEYTIMEOUT=40
+  bindkey 'jj' vi-cmd-mode
+#+END_SRC
+
+We can also add two-key bindings to jump to the start and end of the line:
+
+#+BEGIN_SRC sh
+  # Bind to both possible orders in which the keys could be pressed.
+  # Move all the way to the left
+  bindkey ';l' end-of-line
+  bindkey 'l;' end-of-line
+  # Move all the way to the right
+  bindkey ';h' beginning-of-line
+  bindkey 'h;' beginning-of-line
+#+END_SRC
+
+Jumping to the beginning of the line is now as easy as pressing =;= and =h= at
+the same time.  No need to switch to normal-mode and your fingers don't leave
+the your keyboard's home-row.  Try it, it's great!
+
+
+** More
+
+Customizations like this can make it much more pleasant to use the command
+line and boost your productivity.  If the above is still not enough, here are
+some more ideas:
+
+- Define custom keymaps, e.g. to control other programs such as =mpc= or
+  =tmux=.
+- Switch to said keymaps via some nice bindings.
+- Show the status of version control systems and build environments in the
+  prompt.
+
+If you don't feel like doing all the work yourself, I can heartly reommend you
+take a look at [[http://ohmyz.sh][oh-my-zsh]].  It offers a great collection of ideas to build on
+and some really cool ready-to-use plugins.  Have fun!
