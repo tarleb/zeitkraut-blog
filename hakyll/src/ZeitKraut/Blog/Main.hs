@@ -243,7 +243,7 @@ postList ctx sortFilter posts = do
 
 sassCompiler :: Compiler (Item String)
 sassCompiler = getResourceString
-               >>= withItemBody (unixFilter "sass" ["-s", "--scss"])
+               >>= withItemBody (unixFilter "node-sass" ["-s", "--scss"])
                >>= return . fmap compressCss
 
 -- Run input bytestring through imagemagick
