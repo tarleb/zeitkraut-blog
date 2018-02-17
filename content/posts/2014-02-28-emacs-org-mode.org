@@ -1,0 +1,115 @@
+---
+title: Blogging with Hakyll and Emacs Org-mode
+date: 2014-02-28
+tags: hakyll, pandoc, emacs, haskell
+---
+
+I finally did it!  I polished up my Haskell-fu and wrote a [[http://johnmacfarlane.net/pandoc][Pandoc]] reader for
+[[http://orgmode.org][Emacs Org-mode]].  As a result, I can now write blog posts in =Org-mode= instead
+of =Markdown=.
+
+You can find the source code +on my github org branch+ in Pandoc's [[https://github.com/jgm/pandoc/blob/master/src/Text/Pandoc/Readers/Org.hs][main repo]].
+
+** Supported Features
+   Not everything works the way it does in Emacs (yet), but support is
+   sufficient for basic document parsing.  Here is a short demonstration of
+   currently supported features:
+
+*** Headlines
+
+**** Another Headline
+
+#+BEGIN_SRC ORG
+*** Headlines
+
+**** Another Headline
+#+END_SRC
+
+*** Ordered Lists
+    1) First
+    2) Second
+    3) Third
+
+#+BEGIN_SRC ORG
+   1) First
+   2) Second
+   3) Third
+#+END_SRC
+
+
+*** Unorders Lists
+    - Pandoc
+    - Haskell
+    - Emacs
+      + Gnus
+      + Org-Mode
+
+    #+BEGIN_SRC ORG
+    - Pandoc
+    - Haskell
+    - Emacs
+      + Gnus
+      + Org-Mode
+    #+END_SRC
+
+
+*** Markup
+
+    - /emph/
+    - *strong*
+    - */strong-emph/*
+    - =code=
+    - +strikeout+
+    - Sub- and Superscripts
+      + 2^n
+      + 2^{n-1}
+      + a_n
+      + a_{n+1}
+
+    #+BEGIN_SRC ORG
+    - /emph/
+    - *strong*
+    - */strong-emph/*
+    - =code=
+    - +strikeout+
+    - Sub- and Superscripts
+      + 2^n
+      + 2^{n-1}
+      + a_n
+      + a_{n+1}
+    #+END_SRC
+
+
+*** Source Code
+    Muttering a greeting in Haskell:
+    #+BEGIN_SRC haskell
+    main :: IO ()
+    main = putStrLn greeting
+      where greeting = "moin"
+    #+END_SRC
+
+    #+BEGIN_SRC ORG
+      #+BEGIN_SRC haskell
+      main :: IO ()
+      main = putStrLn greeting
+        where greeting = "moin"
+      #+END_SRC
+    #+END_SRC
+
+*** Table
+
+    | Language    | Typing          |
+    |-------------+-----------------|
+    | <l>         | <l>             |
+    | Haskell     | strong, static  |
+    | Common Lisp | strong, dynamic |
+    | JavaScript  | weak, dynamic   |
+
+    #+BEGIN_SRC ORG
+    | Language    | Typing          |
+    |-------------+-----------------|
+    | <l>         | <l>             |
+    | Haskell     | strong, static  |
+    | Common Lisp | strong, dynamic |
+    | JavaScript  | weak, dynamic   |
+    #+END_SRC
