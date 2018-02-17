@@ -1,0 +1,23 @@
+---
+author: Albert Krewinkel
+date: 2014-05-09
+title: Pandoc 1.12.4 Released
+tags: haskell, pandoc, org-mode
+---
+
+Yesterday, John MacFarlane released a new version of =pandoc=, the universal
+document converter.  This means that my Emacs org-mode reader is now available
+to everyone.  I'm very curious to see if people actually use the new reader
+(and if I have to deal with a lot of bugs and/or feature requests in the near
+future).
+
+I can't state enough just how great =pandoc= is as a tool and library.  The
+code is very clean, well documented and extending it is (almost ridiculously)
+easy.  And as for the usefulness: Hakyll, the software used for this blog, is
+heavily building on =pandoc=. 'nough said.
+
+So is =pandoc= really like a virus spreading Haskell, as [[https://github.com/jgm][jgm]] recently
+[[https://github.com/jgm/pandoc/issues/1278#issuecomment-42502343][implicated]]?  All I know is that it most certainly got me infected.  A new
+project of mine, [[https://github.com/tarleb/rundoc][=rundoc=]], builds on =pandoc= and is (of course) written in
+Haskell.  It looks like I'll do most of my coding in it, for the foreseeable
+future.
