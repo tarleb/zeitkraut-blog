@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"
+      vocab="http://schema.org/" typeof="Blog">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width initial-scale=1.0" />
+    <title>ZeitLens – $title$</title>
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="icon" type="image/svg+xml" href="/img/zeitlens-logo-default.svg" />
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="/css/font-awesome.min.css" />
+    <link rel="stylesheet" type="text/css" href="/css/zeitlens.css" />
+    <link rel="author"     href="/contact.html#albertkrewinkel" />
+    <link property="image" href="/img/zeitlens-logo-default.svg" />
+    <link rel="apple-touch-icon" href="/img/zeitlens-icon-57x57.png" />
+    <link rel="apple-touch-icon" sizes="72x72" href="/img/zeitlens-icon-72x72.png" />
+    <link rel="apple-touch-icon" sizes="114x114" href="/img/zeitlens-icon-114x114.png" />
+    <link rel="apple-touch-icon" sizes="144x144" href="/img/zeitlens-icon-144x144.png" />
+    <link rel="alternate"  href="/atom.xml" title="ATOM"
+          type="application/atom+xml" />
+    <script type="text/javascript" async="async" src="/scripts/zeitlens.js"></script>
+  </head>
+  <body>
+    <div id="wrap">
+      <div id="header">
+
+        <nav id="navbar" class="navbar navbar-fixed-top" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-exl-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="fa fa-bars"></span>
+              </button>
+              <a href="/">
+                <div class="navbar-brand">
+                  <!-- ZeitLens logo -->
+                  <div class="logo inline-logo" id="brand-logo">$logo$</div>
+                  ZeitLens
+                </div>
+              </a>
+            </div>
+            <div class="collapse navbar-collapse navbar-exl-collapse">
+              <ul class="nav navbar-nav navbar-right">
+                <li><a href="/archive.html">Archive</a></li>
+                <li><a href="/tags.html">Tags</a></li>
+                <li><a href="/colophon.html">Colophon</a></li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+
+        <div id="headerImageContainer">
+          <img id="headerImg" src="/img/header_400x129.jpg" class="img-responsive" alt="" />
+        </div>
+      </div>
+
+      <div id="content" class="container">
+        $body$
+      </div>
+    </div>
+
+    <footer>
+      <div class="container"
+           vocab="http://purl.org/dc/terms/">
+        <div id="copyright-info">
+          <span class="inline-logo">$logo$</span>
+          <span property="title">ZeitLens</span>,
+          <span class="copyright-notice">
+            Copyright © 2014
+            <a href="http://zeitlens.com/contact.html#content"
+               property="http://creativecommons.org/ns#attributionName"
+               rel="http://creativecommons.org/ns#attributionURL">Albert
+               Krewinkel</a>.
+          </span>
+        </div>
+        <div id="legal-info">
+          Text is available under the
+          <a rel="license"
+             href="http://creativecommons.org/licenses/by-sa/3.0/de/deed.en_US">
+            <abbr title="Creative Commons Attribution-ShareAlike 3.0 Germany">
+              CC BY‑SA 3.0 DE</abbr></a> license.
+        </div>
+        <div id="feed-and-code">
+          Read the <a href="./atom.xml">feed <span class="fa fa-rss"></span></a> or
+          grab the
+          <a href="https://github.com/tarleb/zeitlens-blog"
+             >code <span class="fa fa-github"></span></a>!
+        </div>
+      </div>
+    </footer>
+    <script type="text/javascript" src="/scripts/jquery.min.js"></script>
+    <script type="text/javascript" src="/scripts/bootstrap.min.js"></script>
+  </body>
+</html>
