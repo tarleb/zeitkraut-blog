@@ -270,8 +270,8 @@ footer {
     color: $footer-link-color;
 
     &[href^="https://github"]::after,
-    &[href^="http://zeitlens.com"]::after,
-    &[href^="https://zeitlens.com"]::after {
+    &[href^="http://zeitkraut.com"]::after,
+    &[href^="https://zeitkraut.com"]::after {
       content: "";
     }
 
